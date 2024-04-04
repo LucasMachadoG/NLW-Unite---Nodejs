@@ -29,17 +29,18 @@ export async function registerForEvent(app:FastifyInstance) {
       const { name, email } = request.body
       const { eventId } = request.params
 
-      const event = await prisma.event.findUnique({
-        where: {
-          id: eventId
-        }
-      })
-
-      const eventMaxAttendees = await prisma.attendee.count({
-        where: {
-          eventId
-        }
-      })
+      const [ event, eventMaxAttendees ] = await Promise.all([
+        prisma.event.findUnique({
+          where: {
+            id: eventId
+          }
+        }),
+        prisma.attendee.count({
+          where: {
+            eventId
+          }
+        })
+      ])
 
       if(event?.maximumAttendess && eventMaxAttendees >= event?.maximumAttendess){
         throw new EventMaxAttendees()
