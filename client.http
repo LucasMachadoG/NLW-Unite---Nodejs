@@ -1,0 +1,18 @@
+POST http://localhost:3333/events
+Content-Type: application/json
+
+{
+  "title": "Pabli Marçal de cria",
+  "details": "Um evento para quem é apaixonado por programação",
+  "maximumAttendess": 2
+}
+
+###
+
+POST http://localhost:3333/events/6dad632c-0111-4a0f-bd72-f343627e7101/attendees
+Content-Type: application/json
+
+{
+  "name": "Bruna Marshner",
+  "email": "brunaa@gmail.com"
+}
