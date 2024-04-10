@@ -7,6 +7,7 @@ import { EventNotFound } from "../errors/event.not.found";
 export async function getEvent(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get("/event/:eventId", {
     schema: {
+      tags: ['events'],
       params: z.object({
         eventId: z.string().uuid()
       }),
